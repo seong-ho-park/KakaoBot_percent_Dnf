@@ -127,29 +127,29 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
                         }
                     }
                     );
-                }else if(job_detail.indexOf(job_detail.indexOf("크루세이더")!=-1){
-                  buff = ddam_info.select("body > div.ct.con.container > div.tab-wrap > div:nth-child(27) > div.cc.buffcal > table > tbody > tr:nth-child(8) > td:nth-child(2)").text().replace(" ","");
-                  var char_info = '[' + chaS + ']' + chaN + ' / ' + chaJ+ ' / ' + chaR_B+'위'+chaP_B ;   //캐릭터 이름 및 정보
-                  var i2 = '버프력(종합) : '+ buff + '\n' +'버프점수 : '+ buff_score       //버프력
-                  Kakao.send(room, { 
-                      "link_ver": "4.0",
-                      "template_object": { 
-                                          "object_type" : "feed", 
-                                          "button_title": "", 
+                }else if(job_detail.indexOf(job_detail.indexOf("크루세이더")!=-1)){
+                    buff = ddam_info.select("body > div.ct.con.container > div.tab-wrap > div:nth-child(27) > div.cc.buffcal > table > tbody > tr:nth-child(8) > td:nth-child(2)").text().replace(" ","");
+                    var char_info = '[' + chaS + ']' + chaN + ' / ' + chaJ+ ' / ' + chaR_B+'위'+chaP_B ;   //캐릭터 이름 및 정보
+                    var i2 = '버프력(종합) : '+ buff + '\n' +'버프점수 : '+ buff_score ;      //버프력
+                    Kakao.send(room, { 
+                        "link_ver": "4.0",
+                        "template_object": { 
+                                            "object_type" : "feed", 
+                                            "button_title": "", 
 
-                                          "content"     : { "title": char_info, 
-                                                          "image_url":img, 
-                                                          "link": { "web_url": ""}, 
-                                                          "description": i2 }, 
-                                          "buttons"     : [{ "title": "던담으로 보기", 
-                                                          "link" : { "web_url": ddam_link,"mobile_web_url": ddam_link},},
-                                                          { "title": "던오프로 보기", 
-                                                          "link" : { "web_url": dnof_link,"mobile_web_url": dnof_link},},
-                                                          ]
-                      }
-                  }
-                  );
-              }else{
+                                            "content"     : { "title": char_info, 
+                                                            "image_url":img, 
+                                                            "link": { "web_url": ""}, 
+                                                            "description": i2 }, 
+                                            "buttons"     : [{ "title": "던담으로 보기", 
+                                                            "link" : { "web_url": ddam_link,"mobile_web_url": ddam_link},},
+                                                            { "title": "던오프로 보기", 
+                                                            "link" : { "web_url": dnof_link,"mobile_web_url": dnof_link},},
+                                                            ]
+                        }
+                        }
+                        );
+                }else{
                     var i2 = '시로코(1시) : '+ damage1s ; 
                     var char_info = '[' + chaS + ']' + chaN + ' / ' + chaJ+ ' / ' + chaR_D+'위'+chaP ;   //캐릭터 이름 및 정보
                     Kakao.send(room, { 

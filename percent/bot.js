@@ -660,6 +660,11 @@
  
     switch(grade[1]) {
  
-    case "영광" : a = org.jsoup.Jsoup.connect("https://dunfaoff.com/Grade.df").get().select("div.QuestionWrap"); break
+    case "영광" : a = org.jsoup.Jsoup.connect("https://dunfaoff.com/Grade.df").get().select("div.QuestionWrap");
+      break;
  
-    case "청화" : a = org.jsoup.Jsoup.connect("https://dunfaoff.com/Grade.df?type=Accessory&setName=臾댁쓽+毅곸뿭+:+泥?솕+淫명듃").get().select("div.QuestionWrap"); break
+    case "청화" : a = org.jsoup.Jsoup.connect("https://dunfaoff.com/Grade.df?type=Accessory&setName=臾댁쓽+毅곸뿭+:+泥?솕+淫명듃").get().select("div.QuestionWrap"); 
+    break;
+    }
+   }
+}s
