@@ -1,0 +1,2 @@
+# KakaoBot_percent_Dnf
+DnF_KakaoBot_비율_길드
