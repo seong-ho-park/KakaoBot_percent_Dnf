@@ -1,2 +1,3 @@
 # KakaoBot_percent_Dnf
-DnF_KakaoBot_비율_길드
+
+던전앤파이터 카카오톡 자동응답 봇입니다.
