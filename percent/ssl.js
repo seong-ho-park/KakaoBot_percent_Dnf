@@ -2,6 +2,7 @@ importPackage(javax.net.ssl);
 importPackage(java.lang);
 importPackage(java.net);
 importPackage(java.io);
+importPackage(org.jsoup);
 
 module.exports = {
 SSL: function() {
@@ -20,6 +21,8 @@ SSL: function() {
         android.os.StrictMode.setThreadPolicy(policy);
       }
       // javax.net.ssl.SSLHandshakeException (SSL 인증서 오류 방지)
+      javax.net.ssl.SSLHandshakeException();
+      
       let sslContext = SSLContext.getInstance("SSL");
       sslContext.init(null, [new JavaAdapter(X509TrustManager, {
     

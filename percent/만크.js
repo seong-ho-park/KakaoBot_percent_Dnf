@@ -1,12 +1,14 @@
 const ssl = require('ssl');
 
 importClass(org.jsoup.Jsoup);
-
+const Database = DataBase;
 ssl.SSL;
 
 const room_name=["D&F 비율","test open2@","사과"];  //채팅방 이름
+const user_ban = Database.getDataBase('차단').split(' ');
 
 function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName) {
+    if(user_ban.indexOf(sender) == -1){ 
     // @만크 귀검사
     if(room_name.indexOf(room)!=-1 && msg.indexOf("@만크")!=-1) {
         var chat = msg.split(" ")    
@@ -312,6 +314,7 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
                 replier.reply('잘못된 명령어 입니다. \n\n "@만크 직업명"을 확인해주세요');
             }
     }
+}
 }
 
 

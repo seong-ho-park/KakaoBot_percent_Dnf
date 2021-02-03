@@ -3,7 +3,7 @@ const Kakao = new kalingModule();
 const ssl = require('ssl');
 
 Kakao.init('70a2fb416a8b04e9ff151b4c0a1d66ac');
-Kakao.login('psh30095@daum.net','dls754512!@');
+Kakao.login('','');
 
 importClass(org.jsoup.Jsoup);
 

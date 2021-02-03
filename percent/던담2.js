@@ -1,20 +1,51 @@
 const kalingModule = require('kaling').Kakao();
 const Kakao = new kalingModule();
 const ssl = require('ssl');
+const Database = DataBase;
 
 Kakao.init('70a2fb416a8b04e9ff151b4c0a1d66ac');
 Kakao.login('as12q12pst@kakao.com','as12q12pst');
 
 importClass(org.jsoup.Jsoup);
+importPackage(javax.net.ssl);
+importPackage(java.lang);
+importPackage(java.net);
+importPackage(java.io);
 
-ssl.SSL;
-
+ssl.SSL();
 const room_name=["D&F 비율","test open2@","사과"];  //채팅방 이름
+const user_ban = Database.getDataBase('차단').split(' ');
 
 function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName) {
-
+    
     try{
+        if(user_ban.indexOf(sender) == -1){ 
         if(room_name.indexOf(room)!=-1 && msg.indexOf("@던담")!=-1) {
+
+            if (android.os.Build.VERSION.SDK_INT > 9){
+    
+                var policy = new android.os.StrictMode.ThreadPolicy.Builder().permitAll().build();
+            
+                android.os.StrictMode.setThreadPolicy(policy);
+              }
+
+              
+              let sslContext = SSLContext.getInstance("SSL");
+              sslContext.init(null, [new JavaAdapter(X509TrustManager, {
+            
+               getAcceptedIssuers : () => { return null; },
+            
+               checkClientTrusted : () => { return ; },
+            
+               checkServerTrusted : () => { return ; },
+            
+              })], new java.security.SecureRandom());
+            
+             
+            
+              HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+            
+              HttpsURLConnection.setDefaultHostnameVerifier(new JavaAdapter(HostnameVerifier, {verify : (hostname, session) => { return true; }}));
 
                 var chat = msg.split(" ")
                 var chaS = chat[1]
@@ -51,6 +82,7 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
                     chaid = chaid[1].split("\" data-server");
                     const _chaid = chaid[0];
                     var dnof_link = ("https://dunfaoff.com/SearchResult.df?server="+chaS+"&characterid="+chaid[0]); //던오프 링크
+                    
                     var ddam_link = 'https://dundam.xyz/view40s?image='+_chaid+ '&server='+chaS+'&name='+chaN; //던담 링크
                     var img = 'https://img-api.neople.co.kr/df/servers/'+chaS+'/characters/'+_chaid; // 캐릭터 이미지 링크
                     var ddam_info = org.jsoup.Jsoup.connect(ddam_link).ignoreContentType(true).get();
@@ -211,8 +243,9 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
                         );
                     }
                 }
-        }
+        }}
     }catch(e){
         replier.reply(e)
         }
 };
+
