@@ -128,7 +128,16 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
         };
     }
     
-    }catch(e){
-        replier.reply(e)
+    }catch(e){        
+        var text = ""
+        switch(e.message)
+        
+        {
+        case 'org.jsoup.HttpStatusException: HTTP error fetching URL' : text += "던파 점검중이거나 캐릭터 정보를 찾을수없습니다." ; break
+     
+        default : text = e ; break
+    
+        }
+        replier.reply(text)
         };
 };

@@ -245,7 +245,20 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
                 }
         }}
     }catch(e){
-        replier.reply(e)
+        
+        var text = ""
+        switch(e.lineNumber)
+        
+        {
+        case 17 : text += "던파 점검중이거나 캐릭터 정보를 찾을수없습니다." ; break
+    
+        case 73 : text += "던파 점검중이거나 캐릭터 정보를 찾을수없습니다." ; break
+        case 82 : text += "던파 점검중이거나 캐릭터 정보를 찾을수없습니다." ; break
+     
+        default : text = e ; break
+    
+        }
+        replier.reply(text)
         }
 };
 
