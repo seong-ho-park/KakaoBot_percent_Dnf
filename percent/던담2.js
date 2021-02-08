@@ -3,8 +3,8 @@ const Kakao = new kalingModule();
 const ssl = require('ssl');
 const Database = DataBase;
 
-Kakao.init('70a2fb416a8b04e9ff151b4c0a1d66ac');
-Kakao.login('as12q12pst@kakao.com','as12q12pst');
+Kakao.init('');
+Kakao.login('','');
 
 importClass(org.jsoup.Jsoup);
 importPackage(javax.net.ssl);

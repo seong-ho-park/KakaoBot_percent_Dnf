@@ -2,7 +2,7 @@ const kalingModule = require('kaling').Kakao();
 const Kakao = new kalingModule();
 const ssl = require('ssl');
 
-Kakao.init('70a2fb416a8b04e9ff151b4c0a1d66ac');
+Kakao.init('');
 Kakao.login('','');
 
 importClass(org.jsoup.Jsoup);
