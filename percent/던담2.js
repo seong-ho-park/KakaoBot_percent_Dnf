@@ -59,7 +59,9 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
             
                 //server check detail
                 chaN = chaN.replace(/&/g, "&")
-                chaN = chaN.replace(/`/g, "`")    
+                chaN = chaN.replace(/`/g, "`")
+                chaN = chaN.replace(/\{/g, "%7B");    
+                chaN = chaN.replace(/\}/g, "%7D");    
                 chaS = chaS.replace(/카인/g, "cain")
                 chaS = chaS.replace(/디레지에/g, "diregie")
                 chaS = chaS.replace(/시로코/g, "siroco")
@@ -161,6 +163,8 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
                     };
 
                     // server replace
+                    chaN = chaN.replace(/\%7B/g, "{");    
+                    chaN = chaN.replace(/\%7D/g, "}");    
                     chaS = chaS.replace(/cain/g, "카인");
                     chaS = chaS.replace(/diregie/g, "디레지에");
                     chaS = chaS.replace(/siroco/g, "시로코");
@@ -173,11 +177,18 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
                     job_detail = chaJ.split(" ");
 
                     check_battle = ddam_info.select("body > div.ct.con.container > div.tab-wrap > label:nth-child(18)").text();
+
+                    
+
                     //kakao msg
                     
                     if(job_detail.indexOf("인챈트리스")!=-1){
-                        var i2 = '버프력(종합) : '+ buff + '\n' +'버프점수(편애x) : '+ buff_score       //버프력
-                        var char_info = '[' + chaS + ']' + chaN + ' / ' + chaJ+ ' / ' + chaR_B+'위'+chaP_B ;   //캐릭터 이름 및 정보
+                        
+                        var chaP_p = parseFloat(chaR_B.replace(",",""))/parseFloat(chaP_B.replace(")","").replace("(","").replace(",","").replace("인구 ",""))*100 ;
+                        chaP_p =  chaP_p.toFixed(2)
+                        var i2 = '스탯(편애) : '+ buff + '\n' +'버프력(편애x) : '+ buff_score       //버프력
+                        var char_info = '[' + chaS + ']' + chaN + ' / ' + chaJ+ ' / ' + chaR_B+'위'+chaP_B +' / 상위: '+chaP_p+'%';   //캐릭터 이름 및 정보
+                        
                         Kakao.send(room, { 
                             "link_ver": "4.0",
                             "template_object": { 
@@ -197,10 +208,12 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
                         }
                         );
                     }else if(job_detail.indexOf("크루세이더")!=-1 && check_battle === '버프계산' ){
-                        buff = ddam_info.select("body > div.ct.con.container > div.tab-wrap > div:nth-child(27) > div.cc.buffcal > table > tbody > tr:nth-child(7) > td:nth-child(2) > div").text().replace(" ","");
-                        buff_score = ddam_info.select("body > div.ct.con.container > div.tab-wrap > div:nth-child(27) > div.cc.buffcal > table > tbody > tr:nth-child(8) > td:nth-child(2)").text().replace(" ","");
-                        var char_info = '[' + chaS + ']' + chaN + ' / ' + chaJ+ ' / ' + chaR_B+'위'+chaP_B ;   //캐릭터 이름 및 정보
-                        var i2 = '스탯(2각) : '+ buff + '\n' +'버프점수 : '+ buff_score      //버프력
+                        var chaP_p = parseFloat(chaR_B.replace(",",""))/parseFloat(chaP_B.replace(")","").replace("(","").replace(",","").replace("인구 ",""))*100 ;
+                        chaP_p =  chaP_p.toFixed(2)
+                        var stat = ddam_info.select("body > div.ct.con.container > div.tab-wrap > div:nth-child(27) > div.cc.buffcal > table > tbody > tr:nth-child(7) > td:nth-child(2) > div").text().replace(/\s/gi, "");
+                        buff_score = ddam_info.select("body > div.ct.con.container > div.tab-wrap > div:nth-child(27) > div.cc.buffcal > table > tbody > tr:nth-child(8) > td:nth-child(2)").text().replace(/\s/gi, "");
+                        var char_info = '[' + chaS + ']' + chaN + ' / ' + chaJ+ ' / ' + chaR_B+'위'+chaP_B +' / 상위: '+chaP_p+'%';   //캐릭터 이름 및 정보
+                        var i2 = '스탯(2각) : '+ stat + '\n' +'버프력 : '+ buff_score +'점'      //버프력
                         var i3 = '시로코(25초) : '+ s_damage25;
                         Kakao.send(room, { 
                             "link_ver": "4.0",
@@ -220,9 +233,11 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
                             }
                         });
                     }else{
+                        var chaP_p = parseFloat(chaR_D.replace(",",""))/parseFloat(chaP.replace(")","").replace("(","").replace(",","").replace("인구 ",""))*100 ;
+                        chaP_p =  chaP_p.toFixed(2)
                         var i2 = '시로코(1시) : '+ damage1s ; 
                         var i3 = '시로코(25초) : '+ s_damage25;
-                        var char_info = '[' + chaS + ']' + chaN + ' / ' + chaJ+ ' / ' + chaR_D+'위'+chaP ;   //캐릭터 이름 및 정보
+                        var char_info = '[' + chaS + ']' + chaN + ' / ' + chaJ+ ' / ' + chaR_D+'위'+chaP +' / 상위: '+chaP_p+'%' ;   //캐릭터 이름 및 정보
                         Kakao.send(room, { 
                             "link_ver": "4.0",
                             "template_object": { 
@@ -261,4 +276,3 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
         replier.reply(text)
         }
 };
-
