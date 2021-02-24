@@ -19,33 +19,36 @@ const user_ban = Database.getDataBase('차단').split(' ');
 function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName) {
     
     try{
-        if(user_ban.indexOf(sender) == -1){ 
+        //차단목록 확인
+        if(user_ban.indexOf(sender) == -1){
+        
+            // 
             if(room_name.indexOf(room)!=-1 && msg.indexOf("@던담")!=-1) {
 
                 if (android.os.Build.VERSION.SDK_INT > 9){
-    
+
                     var policy = new android.os.StrictMode.ThreadPolicy.Builder().permitAll().build();
-            
+                
                     android.os.StrictMode.setThreadPolicy(policy);
                 }
 
-              
-            let sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, [new JavaAdapter(X509TrustManager, {
-            
-                getAcceptedIssuers : () => { return null; },
-            
-                checkClientTrusted : () => { return ; },
-            
-                checkServerTrusted : () => { return ; },
-            
-            })], new java.security.SecureRandom());
-            
-             
-            
-                HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
-            
-                HttpsURLConnection.setDefaultHostnameVerifier(new JavaAdapter(HostnameVerifier, {verify : (hostname, session) => { return true; }}));
+                    
+                    let sslContext = SSLContext.getInstance("SSL");
+                    sslContext.init(null, [new JavaAdapter(X509TrustManager, {
+                
+                    getAcceptedIssuers : () => { return null; },
+                
+                    checkClientTrusted : () => { return ; },
+                
+                    checkServerTrusted : () => { return ; },
+                
+                    })], new java.security.SecureRandom());
+                
+                    
+                
+                    HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+                
+                    HttpsURLConnection.setDefaultHostnameVerifier(new JavaAdapter(HostnameVerifier, {verify : (hostname, session) => { return true; }}));
 
                 var chat = msg.split(" ")
                 var chaS = chat[1]
@@ -254,12 +257,11 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName)
                                                                 "link" : { "web_url": dnof_link,"mobile_web_url": dnof_link},},
                                                                 ]
                             }
-                        });
+                        }
+                        );
                     }
                 }
-            }
-        }
-
+        }}
     }catch(e){
         
         var text = ""
